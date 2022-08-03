@@ -78,7 +78,7 @@ def parse(asset):
 
 def get_files(path):
     current_folders = [folder for folder in os.listdir(path) if os.path.isdir(os.path.join(path, folder))]
-    all_files = [path + file for file in os.listdir(path) if os.path.isfile(os.path.join(path, file)) and file.endswith(".uexp")]
+    all_files = [os.path.join(path, file) for file in os.listdir(path) if os.path.isfile(os.path.join(path, file)) and file.endswith(".uexp")]
     for current_folder in current_folders:
         full_folder = os.path.join(path, current_folder)
         files = [os.path.join(full_folder, file) for file in os.listdir(full_folder)
