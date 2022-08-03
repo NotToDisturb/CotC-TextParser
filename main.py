@@ -92,7 +92,7 @@ def get_files(path):
 
 def dump_result(result, folder, text_file):
     os.makedirs(folder, exist_ok=True)
-    with open(folder + text_file + ".json", "w+") as file:
+    with open(os.path.join(folder, text_file + ".json"), "w+") as file:
         json.dump(result, file, indent=4)
 
 
@@ -112,7 +112,7 @@ def main():
         if handler:
             result, error_code = parse(handler(file))
             result = sorted(result, key=lambda x: int(x.get("id", "0") if x.get("id", "0") != "" else "0"))
-            dump_result(result, output_folder + file_folder + "\\", file_name)
+            dump_result(result, os.path.join(output_folder, file_folder), file_name)
     print("FINISH")
 
 

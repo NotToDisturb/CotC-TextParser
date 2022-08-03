@@ -5,7 +5,7 @@ to facilitate readability and use in other tools.
 
 ### Usage
 
-An installation of Python (script developed using 3.8.7) is required to run it.
+An installation of Python (script developed using 3.8.7) is required to run the program.
 
 ### Parseable files
 
