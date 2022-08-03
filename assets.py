@@ -28,17 +28,18 @@ class BaseAsset:
             with_content_comp = end_with_content_comp.get(current_read, None)
             if with_content_comp and last_read == end_comp_trigger:
                 return key, with_content_comp
-            elif with_content:
-                return key, with_content
-            elif current_read in end_empty or \
-                    (last_read == end_comp_trigger and current_read in end_empty_comp):
-                return key, "empty"
-            elif current_read not in ignore_chars and current_read != end_comp_trigger:
-                decoded = self.decode(current_read)
-                if not decoded or not self.within_expected_keys(key + decoded):
-                    file.seek(-1, os.SEEK_CUR)
-                    return key, self.expected_keys[key]
-                key += decoded
+            elif end_comp_trigger == b'' or current_read != end_comp_trigger:
+                if with_content:
+                    return key, with_content
+                elif current_read in end_empty or \
+                        (last_read == end_comp_trigger and current_read in end_empty_comp):
+                    return key, "empty"
+                elif current_read not in ignore_chars:
+                    decoded = self.decode(current_read)
+                    if not decoded or not self.within_expected_keys(key + decoded):
+                        file.seek(-1, os.SEEK_CUR)
+                        return key, self.expected_keys[key]
+                    key += decoded
             last_read = current_read
         return key, None
 

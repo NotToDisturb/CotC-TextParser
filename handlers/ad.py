@@ -67,9 +67,9 @@ class AdItemRewardGroupListAsset(BaseAsset):
         self.expected_keys = {
             "id": "excess",
             "ad_itemreward_list_id": "excess",
-            "RewardType": "excess",
-            "RewardItemId": "excess",
-            "RewardNum": "excess",
+            "RewardType": "number_1",
+            "RewardItemId": "number_1",
+            "RewardNum": "number_1",
             "rate": "number_1"
         }
 
@@ -77,11 +77,12 @@ class AdItemRewardGroupListAsset(BaseAsset):
         ignore_chars = [b'\x00']
         end_empty = [b'\xAA', b'\xA9']
         end_with_content = {
+            b'\x94':        "number_1",
             b'\xD1':        "number_2",
             b'\xD2':        "number_4",
         }
         end_comp_trigger = b'\x94'
-        end_empty_comp = [b'\x00', b'\x64']
+        end_empty_comp = []
         end_with_content_comp = {
             b'\xD1':        "number_2",
             b'\xD2':        "number_4",
