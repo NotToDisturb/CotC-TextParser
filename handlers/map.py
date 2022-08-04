@@ -157,3 +157,42 @@ class MapPathListTableAsset(BaseMapAsset):
         ends = [b'\xA9', b'\xAE']
         expected_length = int.from_bytes(file.read(1) + file.read(1), "big")
         return self.parse_text(file, ends, expected_length=expected_length)
+
+
+class MapIconTypeAsset(BaseMapAsset):
+    HEADER_END_CHAR = b'\xDC'
+    SEPARATOR_END_CHAR = b'\xA4'
+
+    def __init__(self, file_path):
+        self.file_path = file_path
+        self.content_parsers = {
+            "number_1": self.parse_number_1,
+            "number_2": self.parse_number_2,
+            "excess": self.do_excess_key,
+            "empty": self.do_empty_contents
+        }
+        self.expected_keys = {
+            "id": "number_1",
+            "texId": "number_1",
+        }
+
+    def find_key(self, file):
+        ignore_chars = []
+        end_empty = [b'\xA0']
+        end_with_content = {
+            b'\xD1':        "number_2",
+        }
+        end_comp_trigger = b''
+        end_empty_comp = []
+        end_with_content_comp = {}
+
+        return self.find_generic_key(file, ignore_chars, end_empty, end_with_content,
+                                     end_comp_trigger, end_empty_comp, end_with_content_comp)
+
+    def parse_number_1(self, file):
+        ends = [b'\x82', b'\xA7']
+        return self.parse_number(file, ends, expected_length=1)
+
+    def parse_number_2(self, file):
+        ends = [b'\x82', b'\xA7']
+        return self.parse_number(file, ends, expected_length=2)

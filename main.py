@@ -1,6 +1,6 @@
 from handlers.ad import AdBattleGroupListAsset, AdItemRewardGroupListAsset, TimestampAsset
 from handlers.gametext import NPCGameTextAsset, EventGameTextAsset, IdGameTextAsset, JPGameTextAsset
-from handlers.map import MapListTableAsset, MapPathListTableAsset
+from handlers.map import MapListTableAsset, MapPathListTableAsset, MapIconTypeAsset
 
 import json
 import os
@@ -16,18 +16,19 @@ asset_handlers = {
     "GameTextCharacter": IdGameTextAsset,
     "GameTextEnemy": IdGameTextAsset,
     "GameTextEquip": IdGameTextAsset,
-    "GameTextFC": IdGameTextAsset,             # Works but could use specific
+    "GameTextFC": IdGameTextAsset,
     "GameTextItem": IdGameTextAsset,
     "GameTextMap": IdGameTextAsset,
     "GameTextPC": IdGameTextAsset,
-    "GameTextQuest": IdGameTextAsset,          # Works but could use specific
-    "GameTextQuestJP": JPGameTextAsset,             # Needs specific
+    "GameTextQuest": IdGameTextAsset,
+    "GameTextQuestJP": JPGameTextAsset,
     "GameTextSkill": IdGameTextAsset,
-    "GameTextStoryBook": IdGameTextAsset,      # Works but could use specific
+    "GameTextStoryBook": IdGameTextAsset,
     "GameTextSupport": JPGameTextAsset,
-    "GameTextUI": IdGameTextAsset,             # Works but could use specific
+    "GameTextUI": IdGameTextAsset,
     "MapListTable": MapListTableAsset,
-    "MapPathListTable": MapPathListTableAsset
+    "MapPathListTable": MapPathListTableAsset,
+    "MapIconType": MapIconTypeAsset
 }
 
 
